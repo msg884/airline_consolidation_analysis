@@ -154,10 +154,8 @@ server <- function(input, output, session) {
     showModal(modalDialog(HTML(text_about), title = 'About'))
   })
   
-#Captions for the tables and treemaps
 
-
-  # Build reactive dataframe based on inputs
+# Build reactive dataframe based on inputs
   data1 <- reactive({
     
     df %>% filter(country.x %in% get(input$dep_region) &
@@ -183,9 +181,9 @@ server <- function(input, output, session) {
     
   })  
   
-  #Text about the scenario selected
+#Create text summary of the scenario created
   
-  #Create a reactive value of the sum of the market share of the top 10 (head) airlines
+#Create a reactive value of the sum of the market share of the top 10 (head) airlines
   
   Top10_Shares <- reactive({ 
     
@@ -215,8 +213,7 @@ server <- function(input, output, session) {
   })
 
 
-  
-  #Create a reactive value of the sum of the market share of the top 5 (head) airlines
+#Create a reactive value of the sum of the market share of the top 5 (head) airlines
   
   Top5_Shares <- reactive({ 
     
@@ -245,7 +242,8 @@ server <- function(input, output, session) {
       select(SUM5)
   })
   
-    #Create text for all 3 Tab Panels
+  
+#Create text for all 3 Tab Panels
   
   output$Your_Scenario <- renderText({
     paste("In the scenario that you have created, the top 10 airlines would account for ", 
@@ -275,7 +273,7 @@ server <- function(input, output, session) {
   })
   
   
-  #Create text for all 3 Tab Panels with the 2019 market share headlines
+#Create text for all 3 Tab Panels with the 2019 market share headlines
   
   output$Original_Scenario <- renderText({
     paste("In 2019, airlines' share of flights departing", input$dep_region,
@@ -294,7 +292,7 @@ server <- function(input, output, session) {
           "and arriving in ", input$arr_region, "was:")
   })
   
-  #Create bar/column plots
+#Create bar/column plots for the scenario selected on user inputs
   
     output$Columns_Future <- renderPlot({
     ggplot(data = data1(), aes(x=reorder(`Theoretical Owner`, `Market Share`), y=`Market Share`)) + geom_col() +
@@ -305,6 +303,8 @@ server <- function(input, output, session) {
         ggthemes::theme_tufte(base_family = "sans", ticks = F, base_size = 20)
     })
   
+
+#Create bar/column plots for the 2019 market
   
   output$Columns_2019 <- renderPlot({
     
@@ -331,7 +331,7 @@ server <- function(input, output, session) {
     
   })
   
-  #Create Tables
+#Create data tables for the scenario based on user inputs
   
   output$Table_Future <- DT::renderDataTable({
     
@@ -359,6 +359,7 @@ server <- function(input, output, session) {
       
     })
   
+  #Create data tables for the 2019 situation
   
   output$Table_2019 <- DT::renderDataTable ({
     
@@ -379,7 +380,7 @@ server <- function(input, output, session) {
   })
   
   
-  #Create treemaps
+  #Create treemaps for the scenario based on user inputs
   
   output$Treemap_Future <- renderPlot({
     ggplot(data = data1(), 
@@ -395,6 +396,7 @@ server <- function(input, output, session) {
       theme(legend.position = "none", plot.title = element_text(size = 20))
   })
   
+  #Create treemaps for the s2019 situation
   
   output$Treemap_2019 <- renderPlot({
     

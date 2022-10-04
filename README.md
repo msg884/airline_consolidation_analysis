@@ -13,3 +13,6 @@ In the app, the data consists of only the flights recorded by Eurocontrol during
 
 European countries are defined in the text file, as are EU+ and EU countries.
 
+NEXT STEPS
+- In an offline only version, I will allow assessment of concentration at Country-level and Airport-level.
+- I have also allowed users to select any airline in the input areas, and not just one of the top 20 airlines; as well as multiple targets.
